@@ -50,7 +50,7 @@ description: "Resume of Ralph Warrand, software engineer working across games an
           <p><strong>Physics &amp; numerics:</strong> constrained multibody dynamics (Spook, LCP), XPBD / PBF, Stable Fluids, explicit and implicit integration, Monte Carlo and discrete-event simulation, Eigen, NumPy / SciPy / SymPy, pybind11.</p>
           <p><strong>Games &amp; graphics:</strong> Unreal Engine 5 (C++ and Blueprints), game AI (behaviour trees, steering), OpenGL, WebGPU / wgpu, DirectX 12 via The Forge, PlayStation 4, EnTT, Dear ImGui.</p>
           <p><strong>Engineering:</strong> CMake, GitHub Actions, Git, Perforce, Jira, doctest / pytest / googletest, Unreal Insights, Optick.</p>
-          <p><strong>Languages spoken:</strong> English and Dutch (native), Afrikaans, French (elementary).</p>
+          <p><strong>Languages spoken:</strong> English and Dutch (native), Afrikaans (mother tongue, conversational), French (elementary).</p>
         </div>
       </div>
 

@@ -25,7 +25,7 @@ description: "Ralph Warrand, software engineer working across games and simulati
 
         <div class="sidebar-section">
           <h3>Languages</h3>
-          <p>English &amp; Dutch (native), Afrikaans, some French</p>
+          <p>English &amp; Dutch (native), Afrikaans (mother tongue, conversational), French (elementary)</p>
         </div>
 
         <div class="sidebar-section">
