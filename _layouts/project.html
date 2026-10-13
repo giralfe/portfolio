@@ -2,237 +2,91 @@
 layout: default
 ---
 
-<div class="page-content">
-  <div class="wrapper">
-    
-    <article class="project-detail">
-      <header class="project-header">
-        <h1 class="project-title">{{ page.title }}</h1>
-        <p class="project-period">{{ page.period }}</p>
-        
+<div class="project-page">
+  <section class="project-hero">
+    <div class="wrapper">
+      <div class="hero-content">
+        <h1 class="project-title-xl">{{ page.title }}</h1>
+        <p class="project-subtitle-lg">{{ page.period }}</p>
+        {% if page.summary %}
+        <p class="project-summary">{{ page.summary }}</p>
+        {% endif %}
         {% if page.tags %}
-        <div class="project-tags">
+        <div class="project-tags-centered">
           {% for tag in page.tags %}
-            <span class="tag">{{ tag }}</span>
+          <a class="tag-premium" href="{{ '/projects/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>
           {% endfor %}
         </div>
         {% endif %}
-      </header>
-
-      <div class="project-content">
-        {{ content }}
       </div>
+    </div>
+  </section>
 
-      <footer class="project-footer">
-        <a href="{{ "/" | relative_url }}" class="back-link">← Back to Portfolio</a>
-        <div class="project-nav">
-          {% assign projects = site.projects | sort: 'date' %}
-          {% for project in projects %}
-            {% if project.url == page.url %}
-              {% assign current_index = forloop.index0 %}
-              {% break %}
-            {% endif %}
-          {% endfor %}
-          
-          {% if current_index > 0 %}
-            {% assign prev_project = projects[current_index | minus: 1] %}
-            <a href="{{ prev_project.url | relative_url }}" class="nav-link prev-project">
-              <span>← Previous</span>
-              <span>{{ prev_project.title | truncate: 30 }}</span>
-            </a>
-          {% endif %}
-          
-          {% if current_index < projects.size | minus: 1 %}
-            {% assign next_project = projects[current_index | plus: 1] %}
-            <a href="{{ next_project.url | relative_url }}" class="nav-link next-project">
-              <span>Next →</span>
-              <span>{{ next_project.title | truncate: 30 }}</span>
-            </a>
-          {% endif %}
+  <div class="project-meta-bar">
+    <div class="wrapper">
+      <div class="meta-items">
+        <div class="meta-item">
+          <span class="meta-label">Role</span>
+          <span class="meta-value">{{ page.role | default: "Developer" }}</span>
         </div>
-      </footer>
-    </article>
+        <div class="meta-item">
+          <span class="meta-label">Platform</span>
+          <span class="meta-value">{{ page.platform | default: "Cross-platform" }}</span>
+        </div>
+        {% if page.repo %}
+        <div class="meta-item">
+          <span class="meta-label">{% if page.repo contains 'github.com' %}Source{% else %}Play{% endif %}</span>
+          <a href="{{ page.repo }}" target="_blank" rel="noopener" class="meta-value link">{% if page.repo contains 'github.com' %}GitHub &rarr;{% elsif page.repo contains 'itch.io' %}itch.io &rarr;{% elsif page.repo contains 'steampowered' %}Steam &rarr;{% else %}Link &rarr;{% endif %}</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 
+  <div class="page-content">
+    <div class="wrapper">
+      <article class="project-detail-premium">
+        <div class="project-content-premium">
+          {% if page.trailer %}
+          <div class="project-trailer">
+            {% include youtube.html id=page.trailer title=page.title caption=page.trailer_caption wide=true %}
+          </div>
+          {% endif %}
+          {{ content }}
+        </div>
+
+        <footer class="project-footer">
+          <a href="{{ '/projects/' | relative_url }}" class="back-link">&larr; All projects</a>
+          <div class="project-nav">
+            {% assign projects = site.projects | sort: 'sort_date' | reverse %}
+            {% for project in projects %}
+            {% if project.url == page.url %}
+            {% assign current_index = forloop.index0 %}
+            {% break %}
+            {% endif %}
+            {% endfor %}
+
+            {% if current_index > 0 %}
+            {% assign prev_index = current_index | minus: 1 %}
+            {% assign prev_project = projects[prev_index] %}
+            <a href="{{ prev_project.url | relative_url }}" class="nav-link prev-project">
+              <span class="nav-dir">&larr; Newer</span>
+              <span class="nav-title">{{ prev_project.title }}</span>
+            </a>
+            {% endif %}
+
+            {% assign max_index = projects.size | minus: 1 %}
+            {% if current_index < max_index %}
+            {% assign next_index = current_index | plus: 1 %}
+            {% assign next_project = projects[next_index] %}
+            <a href="{{ next_project.url | relative_url }}" class="nav-link next-project">
+              <span class="nav-dir">Older &rarr;</span>
+              <span class="nav-title">{{ next_project.title }}</span>
+            </a>
+            {% endif %}
+          </div>
+        </footer>
+      </article>
+    </div>
   </div>
 </div>
-
-<style>
-.project-detail {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem 0;
-}
-
-.project-header {
-  text-align: center;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 2px solid var(--border-color);
-}
-
-.project-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-  line-height: 1.2;
-}
-
-.project-period {
-  color: var(--text-secondary);
-  font-size: 1.125rem;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.project-period::before {
-  content: '📅';
-}
-
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: center;
-}
-
-.project-content {
-  line-height: 1.8;
-  font-size: 1.125rem;
-  color: var(--text-primary);
-}
-
-.project-content h2 {
-  color: var(--primary-color);
-  font-weight: 600;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--primary-color);
-}
-
-.project-content h3 {
-  color: var(--text-primary);
-  font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
-}
-
-.project-content p {
-  margin-bottom: 1.5rem;
-}
-
-.project-content ul, .project-content ol {
-  margin-bottom: 1.5rem;
-  padding-left: 2rem;
-}
-
-.project-content li {
-  margin-bottom: 0.5rem;
-}
-
-.project-content strong {
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.project-content blockquote {
-  border-left: 4px solid var(--primary-color);
-  padding-left: 1.5rem;
-  margin: 2rem 0;
-  font-style: italic;
-  color: var(--text-secondary);
-  background: var(--bg-secondary);
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-}
-
-.project-footer {
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 2px solid var(--border-color);
-}
-
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 600;
-  margin-bottom: 2rem;
-  transition: var(--transition);
-}
-
-.back-link:hover {
-  color: var(--primary-dark);
-  transform: translateX(-4px);
-}
-
-.project-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.nav-link {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1.5rem;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  text-decoration: none;
-  color: var(--text-primary);
-  transition: var(--transition);
-}
-
-.nav-link:hover {
-  background: var(--primary-color);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.nav-link span:first-child {
-  font-weight: 600;
-  color: var(--primary-color);
-}
-
-.nav-link:hover span:first-child {
-  color: white;
-}
-
-.nav-link span:last-child {
-  font-size: 0.875rem;
-  opacity: 0.8;
-}
-
-.next-project {
-  text-align: right;
-}
-
-@media (max-width: 768px) {
-  .project-title {
-    font-size: 2rem;
-  }
-  
-  .project-content {
-    font-size: 1rem;
-  }
-  
-  .project-nav {
-    grid-template-columns: 1fr;
-  }
-  
-  .next-project {
-    text-align: left;
-  }
-}
-</style>
-

@@ -1,5 +1,21 @@
-_site
-.sass-cache
-.jekyll-cache
+_site/
+.sass-cache/
+.jekyll-cache/
 .jekyll-metadata
-vendor
+vendor/
+extracted_data/
+
+# Build artefacts
+*.log
+build_*.txt
+error_log.txt
+
+# LaTeX build files
+_resume/*.aux
+_resume/*.log
+_resume/*.out
+_resume/*.pdf
+_gif-originals/
+_nda-excluded/
+_unused-assets/
+.claude/

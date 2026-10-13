@@ -1,0 +1,93 @@
+% Variant of resume.tex tailored to junior R&D simulation roles (physical products, electromechanical and acoustic modelling). Build: pdflatex resume-rnd.tex
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[top=1.3cm,bottom=1.3cm,left=1.6cm,right=1.6cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{microtype}
+\usepackage{etoolbox}
+\usepackage{textcomp}
+\usepackage[hidelinks,pdftitle={Ralph Warrand - Resume},pdfauthor={Ralph Warrand}]{hyperref}
+
+\definecolor{ink}{HTML}{0F172A}
+\definecolor{accent}{HTML}{0369A1}
+\definecolor{muted}{HTML}{475569}
+\color{ink}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}[{\color{accent}\titlerule[0.6pt]}]
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+\setlist[itemize]{leftmargin=1.1em,itemsep=1.5pt,parsep=0pt,topsep=2pt}
+
+\newcommand{\entry}[4]{%
+  \noindent\textbf{#1}\ifstrempty{#2}{}{ \textcolor{muted}{\textperiodcentered\ #2}}\hfill\textcolor{muted}{#3}\par
+  \ifstrempty{#4}{}{\vspace{1pt}\textcolor{muted}{#4}\par}\vspace{3pt}}
+
+\newcommand{\proj}[3]{\item \textbf{#1} \textcolor{muted}{(#2).} #3}
+
+\begin{document}
+
+% ---------------------------------------------------------------- header
+{\LARGE\bfseries Ralph Warrand}\hfill{\large\color{accent} Simulation \& Numerical Modelling}\par
+\vspace{3pt}
+{\small\textcolor{muted}{Eindhoven, the Netherlands $\cdot$
+\href{mailto:ralphwarrand@gmail.com}{ralphwarrand@gmail.com} $\cdot$
+\href{https://giralfe.github.io/portfolio/}{giralfe.github.io/portfolio} $\cdot$
+\href{https://github.com/giralfe}{github.com/giralfe} $\cdot$
+\href{https://linkedin.com/in/ralphwarrand}{linkedin.com/in/ralphwarrand}}}
+\vspace{6pt}
+
+MSc Computer Science \& Engineering student at TU/e, graduating in March 2027 with a thesis on constrained multibody simulation supervised by dr.\ Andrei Jalba (TU/e) and dr.\ Claude Lacoursi\`ere (Ume\aa{} University / Algoryx, industrial physics simulation). My work is building physical models and the numerical methods that solve them: rigid and deformable mechanics with joints and contact, a DC-motor model coupled into the same solver, incompressible fluids, Monte Carlo electron transport and wave-optics propagation. I check every model against something outside itself (conservation laws, reference implementations, symbolic derivations, measured error) before I trust it. I am looking for a junior R\&D role where simulation drives the design of real physical products, and I want to take this into COMSOL Multiphysics and learn design for manufacture. Dutch and English native speaker, used to explaining technical work to designers, artists and students.
+
+% ---------------------------------------------------------------- education
+\section{Education}
+\entry{MSc Computer Science \& Engineering}{Eindhoven University of Technology}{2024 -- March 2027 (expected)}{Pre-master 2024--25; MSc from 2025; thesis graduation phase since September 2026. Thesis: \emph{An Entity Component System for Extensible 2D Constrained Multibody Simulation}. Relevant courses: Simulation in Computer Graphics, Stochastic Simulation, Computer Graphics, Geometric Algorithms, Machine Learning Engineering, System Validation.}
+\entry{BSc Creative Media \& Game Technologies}{Breda University of Applied Sciences}{2020 -- 2024}{Programming track (IGAD): C++, engine architecture, real-time rendering and simulation in sixteen project blocks with designers and artists. Programming lead and product-owner roles; two Steam releases.}
+\entry{International Baccalaureate Diploma}{International School Eindhoven}{2018 -- 2020}{Higher Level Mathematics, Physics and English Literature. Extra-curricular: math, science and chess club.}
+
+
+% ---------------------------------------------------------------- simulation
+\section{Simulation and modelling}
+\begin{tabularx}{\textwidth}{@{}p{3.1cm}X@{}}
+\textbf{Physics modelled} & rigid-body and multibody dynamics with joints and Coulomb-friction contact; elasticity as compliant constraints; spring networks (cloth, hair); incompressible flow with a free surface, buoyancy and thermal convection; an electromechanical DC motor (charge as a degree of freedom, energy-consistent back-EMF); electron scattering, characteristic X-ray emission and wave propagation through a crystal potential; audio filter chains and aliasing \\
+\textbf{Numerical methods} & variational time stepping (Spook), boxed LCP, projected Gauss--Seidel and Jacobi, direct LDL$^{\mathsf T}$, matrix-free conjugate gradient; explicit and implicit integrators (Euler, midpoint, RK4, implicit Euler) with measured stability limits and energy drift; finite differences on regular grids, level sets with reinitialisation, split-step Fourier propagation; inverse-CDF Monte Carlo sampling; discrete-event simulation with confidence intervals \\
+\textbf{Validation} & conservation checks (energy, volume, constraint error), reference implementations, symbolic re-derivation of the theory with SymPy, unit tests (doctest, pytest, googletest), hardware test ROMs as oracles, scaling benchmarks and profiling \\
+\textbf{Tools} & Python (NumPy, SciPy, SymPy, Matplotlib), C++17/20 (Eigen), CUDA, Java, Rust, \LaTeX, Git, Perforce, CMake, GitHub Actions CI, Jira; Bullet Physics, Unreal Engine 5, OpenGL / WebGPU; Blender at a basic level \\
+\textbf{Languages} & Dutch and English (native), Afrikaans, French (elementary)
+\end{tabularx}
+
+% ---------------------------------------------------------------- projects
+\section{Simulation work}
+\begin{itemize}
+\proj{Flatland: 2D multibody simulation engine (MSc thesis)}{2026--, C++17 / Python}{a physics engine for two-dimensional mechanisms (rigid bodies, hinges, ropes, motors, contact with friction), built in the \emph{Ghosts and Machines} tradition of discrete-time Lagrangian mechanics. Every joint and contact is kept as an exact constraint and the whole system is advanced by one solver (Spook stepping, boxed LCP), so the same code handles a pendulum, a stack of boxes or a motor-driven wheel without special cases. The original library supported one kind of body; I rebuilt it around an entity component system so bodies with any number of degrees of freedom, from point particles to joint chains to deformable meshes, feed the same solver. The first non-mechanical body is a DC motor: the winding's charge is a degree of freedom with the inductance as its mass, $L\,\mathrm{d}i/\mathrm{d}t = V - Ri - K\omega$ and $\tau = Ki$ on the wheels, so the electrical and mechanical domains are integrated together, the same lumped-element coupling as in an electrodynamic transducer. Numerics in a C++17 core (Eigen, pybind11, doctest) driven from Python, so a new experiment is a script rather than a rebuild. Measured: constraints held to $1.6\times10^{-5}$\,m, energy within 0.25\% over 20\,000 steps, 0.74\,ms per step for 250 disks. The elasticity algebra is re-derived symbolically by a script that fails if theory and code disagree. The first hyperelastic element is in; next are a conditioning study of its two regularisation parameters and a benchmark against an external engine.}
+\proj{scrye: electron-microscopy simulation}{2026, Python / NumPy}{simulates what an electron microscope measures, from the physics up. A vectorised Monte Carlo engine tracks electrons through a sample (screened-Rutherford scattering with exact inverse-CDF sampling, secondary electrons, characteristic X-rays with fluorescence yields, energy loss, knock-on damage) and produces backscatter, secondary-electron and EDS images and spectra. A Cowley--Moodie multislice engine propagates the electron wave through the crystal potential (Kirkland potentials, frozen-phonon averaging, lens transfer function) for HRTEM, diffraction and STEM detectors. Physical constants carry units and sources, and derived quantities such as the 2.51\,pm wavelength at 200\,kV match textbook values.}
+\proj{Particletoys: constrained particles, cloth and fluids}{2026, C++, team of 3, TU/e}{my parts: a constraint solver with Lagrange multipliers, Baumgarte stabilisation and matrix-free conjugate gradient; a measured study of four integrators (energy drift, constraint error, largest stable step, cost per step) on a pendulum and a stiff cloth, where the ranking of the schemes flipped with stiffness; 2D cloth with wind and cutting. Fluid project on Stam's solver: a level-set free surface with reinitialisation and volume conservation, rigid bodies two-way coupled to the flow, buoyancy and a temperature field driving thermal convection.}
+\proj{HexForge: GPU particle-physics engine}{2024--, C++20 / CUDA / OpenGL}{fluids (Position Based Fluids), cloth (XPBD), sand and rigid bodies in one CUDA kernel suite with small-step substepping. Particle spacing, kernel radius, the substep bound, damping and rest density are derived from physical inputs, and each kernel is traced to the paper it implements. Screen-space fluid rendering; Windows and Ubuntu CI from the first week.}
+\proj{MochaNES: cycle-accurate NES emulator}{2025--, Java}{a model of a physical machine verified against hardware test ROMs (35 of 51 blargg tests across seven suites, every instruction and timing test passing) and trace-diffed against a reference emulator when a bug was subtle. Audio path with the hardware's non-linear mixer and filter chain (90\,Hz and 440\,Hz high-pass, 14\,kHz low-pass, needed to stop harmonics above Nyquist folding back); a physically motivated CRT model (beam spot, phosphor persistence, NTSC chroma bandwidth, masks) composited in linear light.}
+\proj{Stochastic Simulation (course)}{2025, Python}{discrete-event and Monte Carlo models of queueing systems (a theme-park boat ride, a waste-recycling site) with confidence intervals and capacity analysis.}
+\proj{Other engineering work}{2021--26}{a Rust / WebGPU city renderer with clustered lighting holding about 36\,fps at 10\,000 dynamic lights (team of 3, TU/e); two custom C++ engines running on PlayStation 4 and PC; an OpenGL ES strategy prototype running on a Raspberry Pi 4 and Windows from one source tree. Full write-ups at giralfe.github.io/portfolio.}
+\end{itemize}
+
+% ---------------------------------------------------------------- research
+\section{Research, analysis and benchmarks}
+\begin{itemize}
+\item Wrote comparison documents before building: procedural generation methods from two published games, level-streaming approaches, and AI-crowd optimisation in UE5 (reviewed by my supervisor and presented at the BUas Comeback Day); scored alternatives in decision matrices.
+\item Benchmarked three entity-component data layouts and a packed-array ceiling for the thesis engine up to tens of thousands of vertices, fitted their scaling, and chose the layout from the plot rather than from preference.
+\item Implemented HexForge's solver from the literature (Macklin \& M\"uller, Bender et al., Wang, Ihmsen et al.) with each kernel mapped to its paper, and Flatland from Lacoursi\`ere's doctoral work.
+\item Profiling-first optimisation: Optick and Unreal Insights captures decided what to change (512-agent stress test from 7.4 to 5.3\,ms; distance culling and LODs taking a full game level from 77 to 12.5\,ms).
+\end{itemize}
+
+% ---------------------------------------------------------------- teams
+\section{Product development in multidisciplinary teams}
+\entry{Verdant Games}{student studio, BUas incubator}{2023 -- 2024}{Lead programmer on the five-person core team of an early-phase game concept for the first half of the year: held a programmers' meeting every sprint, set up the code-review pipeline, wrote the conventions document, owned procedural dungeon generation from research document to working system, plus gameplay features. Groundwork the spring before: the \textit{Encourage} founders' workshop, ending in a public demo at \textit{Night of the Nerds}.}
+\entry{Fishbait Studios}{BUas student team, S.P.L.I.C.E.D. (released on Steam)}{2022 -- 2023}{AI and gameplay programmer and programming lead in a team of programmers, designers, artists, animators and outsourced tech art over a full academic year. Built the boss encounter with all tuning exposed to the designer, wrote specifications for outsourced VFX, ran code review for the team, migrated the project to UE 5.1 and profiled it for teammates on weaker machines.}
+\entry{SUB NIVIS}{BUas team, PC and PlayStation 4}{2022}{Product owner for the release block: planning and risk assessment, direction document, backlog, sprint reviews, seven playtest sessions with outside players. Also engine work: Quake BSP/WAD loading, enemy AI, the console build.}
+\entry{Small Dragon Big Appetite}{graduation project, sole programmer; released free on Steam}{2024}{Analysed a 48-hour jam build, planned seven weeks, prototyped the key feature four ways and tested each version with a recruited user group, measured performance with a profiler before optimising.}
+\entry{Bijlesnetwerk}{STEM tutor, part-time}{2020 -- 2022}{Mathematics and English for secondary-school students: explaining one idea at several levels.}
+
+\end{document}

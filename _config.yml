@@ -1,17 +1,27 @@
 # Site settings
-title: Ralph Warrand - Game Developer Portfolio
+title: Ralph Warrand
 email: ralphwarrand@gmail.com
 description: >-
-  Portfolio showcasing my journey as a Creative Media and Game Technologies student
-  at Breda University of Applied Sciences and beyond.
+  Ralph Warrand, software engineer working across games and simulation. Two UE5
+  games released on Steam, engines built from scratch, and an MSc thesis at TU/e on
+  constrained multibody simulation, plus GPU particle physics and a NES emulator.
+tagline: Software Engineer, Games & Simulation
+# Social preview for pages without their own `image`
+og_image: /assets/hexforge/xpbd-fluid-splash.jpg
+github: https://github.com/giralfe
+linkedin: https://linkedin.com/in/ralphwarrand
+itch: https://ralphwarrand.itch.io
+# Google Search Console > Add property > URL prefix https://giralfe.github.io/portfolio/
+# > HTML tag: paste only the content="..." value here.
+google_site_verification:
 baseurl: "/portfolio"
-url: "https://ralphwarrand.github.io"
+url: "https://giralfe.github.io"
 
 # Build settings
 markdown: kramdown
 theme: minima
 plugins:
-  - jekyll-feed
+  # - jekyll-feed
 
 # Collections
 collections:
@@ -36,4 +46,14 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+  # Local-only research data - slide JSONs, source media, extractor scripts.
+  # Excluded from the published site so builds don't have to copy hundreds of MB.
+  - extracted_data/
+  - _gif-originals/
+  - _nda-excluded/
+  - _unused-assets/
+  - .gitignore
+  - README.md
+  - _resume/
+  - vendor/
 

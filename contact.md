@@ -2,359 +2,56 @@
 layout: default
 title: Contact
 permalink: /contact/
+description: "Get in touch with Ralph Warrand about game, engine and physics programming roles or research collaborations."
 ---
 
-<div class="page-content">
+<div class="page-content contact-wrapper">
   <div class="wrapper">
     
-    <div class="contact-hero">
-      <h1 class="contact-title">Let's Connect</h1>
-      <p class="contact-subtitle">Ready to collaborate, discuss game development, or explore opportunities? I'd love to hear from you!</p>
-    </div>
-
-    <div class="contact-grid">
-      
-      <div class="contact-info">
-        <h2>Get In Touch</h2>
-        <p>Whether you're interested in my work, have a project in mind, or just want to chat about game development and graphics programming, feel free to reach out through any of these channels:</p>
-        
-        <div class="contact-methods">
-          <a href="mailto:contact@ralphwarrand.dev" class="contact-method">
-            <div class="contact-icon">✉️</div>
-            <div class="contact-details">
-              <h3>Email</h3>
-              <p>contact@ralphwarrand.dev</p>
-              <span>Best for detailed discussions</span>
-            </div>
-          </a>
-          
-          <a href="https://linkedin.com/in/ralphwarrand" target="_blank" rel="noopener" class="contact-method">
-            <div class="contact-icon">💼</div>
-            <div class="contact-details">
-              <h3>LinkedIn</h3>
-              <p>linkedin.com/in/ralphwarrand</p>
-              <span>Professional networking</span>
-            </div>
-          </a>
-          
-          <a href="https://github.com/ralphwarrand" target="_blank" rel="noopener" class="contact-method">
-            <div class="contact-icon">💻</div>
-            <div class="contact-details">
-              <h3>GitHub</h3>
-              <p>github.com/ralphwarrand</p>
-              <span>Check out my code</span>
-            </div>
-          </a>
-        </div>
+    <div class="contact-card glass-panel">
+      <div class="contact-header">
+        <h1>Get in touch</h1>
+        <p>Game, engine and physics programming roles, simulation and R&amp;D work, research collaborations, or questions about any of the projects. I am happy to talk. Drop a line below or reach out directly.</p>
       </div>
 
-      <div class="contact-form-section">
-        <h2>Quick Message</h2>
-        <p>Prefer to send a message directly? Use the form below and I'll get back to you as soon as possible.</p>
-        
-        <form class="contact-form" action="https://formspree.io/f/xpzgkqpv" method="POST">
-          <div class="form-group">
+      <form class="minimal-form" action="https://formspree.io/f/xpzgkqpv" method="POST">
+        <div class="form-row">
+          <div class="input-group">
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required placeholder="Your name">
           </div>
-          
-          <div class="form-group">
+          <div class="input-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" required placeholder="you@example.com">
           </div>
-          
-          <div class="form-group">
-            <label for="subject">Subject</label>
-            <select id="subject" name="subject" required>
-              <option value="">Select a topic...</option>
-              <option value="collaboration">Collaboration Opportunity</option>
-              <option value="project">Project Discussion</option>
-              <option value="internship">Internship/Job Opportunity</option>
-              <option value="feedback">Portfolio Feedback</option>
-              <option value="general">General Inquiry</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="6" placeholder="Tell me about your project, question, or how we might work together..." required></textarea>
-          </div>
-          
-          <button type="submit" class="submit-button">
-            <span>Send Message</span>
-            <span>🚀</span>
-          </button>
-        </form>
-      </div>
-      
-    </div>
+        </div>
+        
+        <div class="input-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required placeholder="What would you like to talk about?"></textarea>
+        </div>
 
-    <div class="contact-cta">
-      <h2>About My Work</h2>
-      <p>I'm currently focused on <strong>graphics programming</strong> and <strong>game engine development</strong>, with particular interests in:</p>
-      <div class="interests-grid">
-        <div class="interest-item">
-          <h3>🎮 Game Development</h3>
-          <p>Building interactive experiences with modern game engines and custom tools</p>
-        </div>
-        <div class="interest-item">
-          <h3>🎨 Graphics Programming</h3>
-          <p>DirectX 12, OpenGL, shader development, and rendering optimization</p>
-        </div>
-        <div class="interest-item">
-          <h3>⚡ Performance Optimization</h3>
-          <p>Low-level programming, memory management, and system architecture</p>
-        </div>
-        <div class="interest-item">
-          <h3>🤝 Team Collaboration</h3>
-          <p>Agile development, technical leadership, and cross-disciplinary communication</p>
+        <button type="submit" class="btn-send">
+          Send message
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </button>
+      </form>
+
+      <div class="contact-footer">
+        <p>Or reach me directly:</p>
+        <div class="direct-links">
+          <a href="mailto:ralphwarrand@gmail.com" aria-label="Email">
+             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+             ralphwarrand@gmail.com
+          </a>
+          <a href="{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+             LinkedIn
+          </a>
         </div>
       </div>
+
     </div>
 
   </div>
 </div>
-
-<style>
-.contact-hero {
-  text-align: center;
-  margin-bottom: 4rem;
-  padding: 2rem 0;
-}
-
-.contact-title {
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.contact-subtitle {
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  margin-bottom: 4rem;
-}
-
-.contact-info h2,
-.contact-form-section h2 {
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-}
-
-.contact-info p,
-.contact-form-section p {
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-.contact-methods {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.contact-method {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  text-decoration: none;
-  color: var(--text-primary);
-  transition: var(--transition);
-}
-
-.contact-method:hover {
-  background: var(--primary-color);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.contact-icon {
-  font-size: 2rem;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--bg-primary);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.contact-method:hover .contact-icon {
-  background: white;
-}
-
-.contact-details h3 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin: 0 0 0.25rem 0;
-}
-
-.contact-details p {
-  font-size: 0.875rem;
-  margin: 0 0 0.25rem 0;
-  opacity: 0.8;
-}
-
-.contact-details span {
-  font-size: 0.75rem;
-  opacity: 0.6;
-}
-
-.contact-form {
-  background: var(--bg-secondary);
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  display: block;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  font-size: 1rem;
-  transition: var(--transition);
-  background: var(--bg-primary);
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.submit-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  width: 100%;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: var(--border-radius);
-  font-size: 1.125rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.submit-button:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.contact-cta {
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, #e0e7ff 100%);
-  padding: 3rem;
-  border-radius: var(--border-radius);
-  text-align: center;
-}
-
-.contact-cta h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-}
-
-.contact-cta > p {
-  color: var(--text-secondary);
-  font-size: 1.125rem;
-  margin-bottom: 2rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.interests-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.interest-item {
-  background: var(--bg-primary);
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-  text-align: left;
-}
-
-.interest-item h3 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
-}
-
-.interest-item p {
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin: 0;
-}
-
-@media (max-width: 768px) {
-  .contact-title {
-    font-size: 2.5rem;
-  }
-  
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .contact-form {
-    padding: 1.5rem;
-  }
-  
-  .contact-cta {
-    padding: 2rem;
-  }
-  
-  .interests-grid {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
-

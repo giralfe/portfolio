@@ -1,0 +1,96 @@
+% Variant of resume.tex tailored to C++ software engineering roles in robotics,
+% vision-based localization and perception (OpenCV / ROS2 / Linux / GitLab CI).
+% Build: pdflatex resume-localization.tex
+% Differences from the general resume: simulation-for-product-design framing
+% removed, C++/Linux/testing/CI brought to the front, numerical work reframed
+% around the linear algebra that pose estimation is built on.
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[top=1.3cm,bottom=1.3cm,left=1.6cm,right=1.6cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{microtype}
+\usepackage{etoolbox}
+\usepackage{textcomp}
+\usepackage[hidelinks,pdftitle={Ralph Warrand - Resume},pdfauthor={Ralph Warrand}]{hyperref}
+
+\definecolor{ink}{HTML}{0F172A}
+\definecolor{accent}{HTML}{0369A1}
+\definecolor{muted}{HTML}{475569}
+\color{ink}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}[{\color{accent}\titlerule[0.6pt]}]
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+\setlist[itemize]{leftmargin=1.1em,itemsep=1.5pt,parsep=0pt,topsep=2pt}
+
+\newcommand{\entry}[4]{%
+  \noindent\textbf{#1}\ifstrempty{#2}{}{ \textcolor{muted}{\textperiodcentered\ #2}}\hfill\textcolor{muted}{#3}\par
+  \ifstrempty{#4}{}{\vspace{1pt}\textcolor{muted}{#4}\par}\vspace{3pt}}
+
+\newcommand{\proj}[3]{\item \textbf{#1} \textcolor{muted}{(#2).} #3}
+
+\begin{document}
+
+% ---------------------------------------------------------------- header
+{\LARGE\bfseries Ralph Warrand}\hfill{\large\color{accent} C++ Software Engineer}\par
+\vspace{3pt}
+{\small\textcolor{muted}{Eindhoven, the Netherlands $\cdot$
+\href{mailto:ralphwarrand@gmail.com}{ralphwarrand@gmail.com} $\cdot$
+\href{https://giralfe.github.io/portfolio/}{giralfe.github.io/portfolio} $\cdot$
+\href{https://github.com/giralfe}{github.com/giralfe} $\cdot$
+\href{https://linkedin.com/in/ralphwarrand}{linkedin.com/in/ralphwarrand}}}
+\vspace{6pt}
+
+I am a C++ engineer finishing an MSc in Computer Science and Engineering at TU/e, graduating in March 2027, after a BSc in game technology. For the past four years I have written real-time C++ that has to keep running under load, and I like to measure whether it actually does.
+
+\vspace{4pt}
+My thesis is a physics engine for two-dimensional machines: parts connected by hinges, ropes and motors, that collide and rub against each other. Underneath, all of it comes down to solving a large sparse system of equations quickly and stably, which is closely related to the maths behind camera-based position tracking. I work in Linux, set up automated builds and tests at the start of a project rather than at the end, and check results against an independent reference before I trust them.
+
+\vspace{4pt}
+I would like to move into vision-based localization and get properly deep in one domain. Dutch and English are both native languages for me. I live in Eindhoven and have the right to work in the Netherlands.
+\vspace{2pt}
+
+% ---------------------------------------------------------------- skills
+\section{Engineering skills}
+\begin{tabularx}{\textwidth}{@{}p{3.1cm}X@{}}
+\textbf{Languages} & C++17/20 as my main language for four years, with Eigen, pybind11 and CUDA; Python (NumPy, SciPy, SymPy) for tooling, analysis, and driving C++ code; some Rust and Java \\
+\textbf{Tools} & Linux (Ubuntu, Raspberry Pi, cross-compiled builds), CMake, Git, GitHub Actions for CI on every project since 2024, Perforce, Jira, Docker and self-hosted Linux services \\
+\textbf{Testing} & doctest, googletest and pytest. I also test against things outside the code: hardware test suites, published reference implementations, and a script that re-derives the maths symbolically and fails the build if it disagrees with what I wrote \\
+\textbf{Maths and numerics} & sparse linear algebra and least squares, both direct and iterative solvers, numerical integration with measured stability limits, Monte Carlo sampling, and the 3D transforms and camera projection used in real-time rendering \\
+\textbf{Performance} & profiling to decide what to change, cache-friendly data layouts, working to real-time frame budgets, solver steps under a millisecond \\
+\textbf{Spoken} & Dutch and English (native), Afrikaans, French (elementary) \\
+\textbf{Learning next} & OpenCV, ROS2 and visual localization, which are the areas I am hoping to grow into \\
+\end{tabularx}
+
+% ---------------------------------------------------------------- work
+\section{Engineering work}
+\begin{itemize}
+\proj{Flatland: 2D physics engine (MSc thesis)}{2026--, C++17 and Python}{A physics engine for flat, two-dimensional machines: rigid parts joined by hinges, ropes and motors, with friction where they touch. Every joint and contact is written as a constraint and handled by one solver, so a swinging pendulum, a stack of crates and a motor turning a wheel all run through the same code with no special cases. The original library only supported one kind of body, so I rebuilt it around an entity component system, which lets bodies of any complexity use the same solver. The numerical core is C++17 (Eigen, pybind11, doctest) and is driven from Python, so trying a new experiment means writing a short script instead of recompiling. \textbf{Measured:} joints stay accurate to $1.6\times10^{-5}$\,m, total energy stays within 0.25\% over 20\,000 steps, and a scene with 250 interacting bodies takes 0.74\,ms per step. Supervised by dr.\ Andrei Jalba (TU/e) and dr.\ Claude Lacoursi\`ere (Ume\aa{} University and Algoryx).}
+\proj{HexForge: GPU physics engine}{2024--, C++20, CUDA and OpenGL}{Fluids, cloth, sand and rigid bodies simulated together on the GPU in real time, written as a suite of CUDA kernels. Each constant in the solver is worked out from physical inputs in a single header, with a short note on the reasoning and the paper it came from, so the numbers can be checked rather than taken on trust. Continuous integration on both Windows and Ubuntu from the first week of the project.}
+\proj{Clustered lighting city renderer}{2026, Rust and WebGPU, team of 3, TU/e}{A real-time renderer that holds around 36 frames per second with 10\,000 moving lights. I wrote most of the renderer and all of the shaders, including the camera and projection maths and the clustering that works out which lights affect which region of the screen.}
+\proj{MochaNES: cycle-accurate hardware emulator}{2025--, Java}{An emulator of the NES, checked against the test programs the hardware community wrote for real consoles: 35 of 51 tests pass, including all of the instruction and timing tests. When a failure was too subtle to read directly, I compared execution traces against a reference emulator step by step to find where they first diverged. The audio path reproduces the console's mixer and filter chain, including the filters needed to stop high harmonics folding back and turning into noise.}
+\proj{Particletoys: solvers and integrators}{2026, C++, team of 3, TU/e}{A constraint solver built on Lagrange multipliers and a matrix-free conjugate gradient method, together with a study comparing four numerical integrators on accuracy, stability and cost per step. Which method came out best changed as the simulated material got stiffer. Also a water surface that holds its volume over time, with floating objects that push back on the flow.}
+\proj{scrye: electron microscope simulation}{2026, Python and NumPy}{A simulation of what an electron microscope sees, built up from the underlying physics. One half tracks individual electrons scattering through a sample; the other propagates the electron wave through the crystal and the lens to form an image. Every physical constant carries a unit and a source, and the results are checked against published reference values.}
+\proj{Shipped C++ engine work}{2021--24}{Two custom C++ engines taken through console certification and released on PlayStation 4 and PC, and a strategy prototype that builds and runs on both a Raspberry Pi 4 and Windows from a single source tree. Write-ups at giralfe.github.io/portfolio.}
+\end{itemize}
+
+% ---------------------------------------------------------------- process
+\section{Engineering practice and teamwork}
+\entry{Verdant Games}{lead programmer, student studio in the BUas incubator}{2023 -- 2024}{Led the programming side of a five-person core team for the first half of the year. I set up the code review process, wrote the team's coding conventions, ran the programming meetings, and took one subsystem from a research document through to a working implementation. Getting review and shared standards working well is a part of the job I genuinely enjoy.}
+\entry{Fishbait Studios}{AI programmer and programming lead, S.P.L.I.C.E.D. (Steam)}{2022 -- 2023}{Reviewed every piece of code the other programmers submitted over a full academic year, in a team that also included designers, artists and outside contractors. I wrote the specifications for outsourced work, moved the project onto a new major engine version, and profiled it on behalf of teammates whose machines were struggling. I am comfortable both giving and receiving direct technical feedback.}
+\entry{SUB NIVIS}{product owner, PC and PlayStation 4 release block}{2022}{Planning and risk assessment, backlog and sprint reviews, and seven playtest sessions with people from outside the team. I also wrote engine code alongside it: asset loading, enemy AI and the console build.}
+\entry{Small Dragon Big Appetite}{sole programmer, graduation project, released on Steam}{2024}{I looked at an existing prototype, planned seven weeks of work around it, built the central feature four different ways and tested each version with a recruited group of players, then used a profiler to decide what was worth optimising.}
+
+% ---------------------------------------------------------------- education
+\section{Education}
+\entry{MSc Computer Science \& Engineering}{Eindhoven University of Technology}{2024 -- March 2027 (expected)}{Thesis graduation phase since September 2026. Most relevant coursework: Geometric Algorithms, System Validation, Machine Learning Engineering, Computer Graphics, Simulation in Computer Graphics, Stochastic Simulation.}
+\entry{BSc Creative Media \& Game Technologies}{Breda University of Applied Sciences}{2020 -- 2024}{Programming track (IGAD): C++, engine architecture and real-time systems across sixteen project blocks with multidisciplinary teams. Two titles released on Steam.}
+\entry{International Baccalaureate Diploma}{International School Eindhoven}{2018 -- 2020}{Higher Level Mathematics, Physics and English Literature.}
+
+\end{document}

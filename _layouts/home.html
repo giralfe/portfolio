@@ -2,66 +2,218 @@
 layout: default
 ---
 
-<section class="hero-section">
+<div class="page-content dashboard-wrapper">
   <div class="wrapper">
-    <div class="hero-content">
-      <h1 class="hero-title">Ralph Warrand</h1>
-      <p class="hero-subtitle">Creative Media & Game Technologies Graduate | MSc Computer Science and Engineering Student |  Building the Future of Interactive Entertainment</p>
-      <a href="#projects" class="hero-cta">
-        <span>Explore My Journey</span>
-        <span>↓</span>
-      </a>
-    </div>
-  </div>
-</section>
 
-  <div class="page-content">
-    <div class="wrapper">
-      
-    <h2>About Me</h2>
+    <div class="dashboard-grid">
 
-    <p>I'm passionate about <strong>game development</strong>, with a particular interest in <strong>graphics programming</strong>. Throughout my studies at <strong>Breda University of Applied Sciences</strong>, I've been exploring various aspects of game development, from programming fundamentals to advanced rendering techniques.</p>
-
-    <h3>My Focus Areas</h3>
-    <ul>
-      <li><strong>Graphics Programming</strong>: OpenGL, shader development</li>
-      <li><strong>Game Engines</strong>: Unity, Unreal Engine, custom engine development</li>
-      <li><strong>Programming Languages</strong>: C++, Python, Java, GLSL, HLSL</li>
-      <li><strong>Specializations</strong>: Game engine architecture, gameplay programming, and graphics programming</li>
-    </ul>
-
-    <section id="projects" class="projects-section">
-      <h2 class="section-title">My Learning Journey</h2>
-      <p class="section-subtitle">Explore my projects and learning outcomes from my time at Breda University of Applied Sciences and Eindhoven University of Technology</p>
-
-      <div class="projects-grid">
-        {%- for project in site.projects reversed -%}
-          <article class="project-card">
-            <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
-            <p class="project-period">{{ project.period }}</p>
-            <div class="project-tags">
-              {%- for tag in project.tags -%}
-                <span class="tag">{{ tag }}</span>
-              {%- endfor -%}
-            </div>
-            <p class="project-excerpt">{{ project.content | strip_html | truncatewords: 25 }}</p>
-            <a href="{{ project.url | relative_url }}" class="read-more">Read More</a>
-          </article>
-        {%- endfor -%}
+      <!-- 1. Profile Card -->
+      <div class="card profile-card">
+        <!-- Boids from the Y3A self-study, drawn by assets/js/boids.js. -->
+        <div class="profile-banner" aria-hidden="true"></div>
+        <!-- Placeholder. For a photo, move _unused-assets/images/profile.jpg back to
+             assets/images/ and replace the svg with
+             <img src="{{ '/assets/images/profile.jpg' | relative_url }}" alt=""> -->
+        <div class="profile-avatar" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 21a8 8 0 0 1 16 0"></path>
+          </svg>
+        </div>
+        <h1 class="profile-name">Ralph Warrand</h1>
+        <p class="profile-role">{{ site.tagline | escape }}</p>
+        <p class="profile-meta">MSc Computer Science &amp; Engineering, TU/e<br>Eindhoven, the Netherlands</p>
+        <div class="profile-stats">
+          {%- assign current_year = 'now' | date: '%Y' | plus: 0 -%}
+          {%- assign years_coding = current_year | minus: 2020 -%}
+          <div class="stat-item">
+            <span class="stat-number">{{ years_coding }}</span>
+            <span class="stat-label">Years of <span class="nowrap">C++</span></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">{{ site.projects.size }}</span>
+            <span class="stat-label">Documented projects</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">2</span>
+            <span class="stat-label">Steam releases</span>
+          </div>
+        </div>
+        <div class="profile-socials">
+          <a href="{{ site.github }}" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+              </path>
+            </svg>
+          </a>
+          <a href="{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a href="mailto:{{ site.email }}" aria-label="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </a>
+        </div>
+        <a href="{{ '/contact/' | relative_url }}" class="profile-cta">Get in touch</a>
       </div>
-    </section>
 
-      <section class="cta-section">
-        <h2>Let's Connect</h2>
-        <p>Interested in my work or want to collaborate? I'd love to hear from you!</p>
-        <a href="{{ 
-'/contact/' | relative_url }}" class="cta-button">
-          <span>Get In Touch</span>
-          <span>✉️</span>
-        </a>
-      </section>
+      <!-- 2. Intro / Bio Card -->
+      <div class="card intro-card">
+        <h2 class="card-title">From <em>gameplay code</em> to <em>physics solvers</em></h2>
+        <p class="intro-lead">
+          I write software for games and for research: gameplay and AI systems, engines and renderers, physics
+          solvers, and the tools around them. In a game the code has to feel right and fit in the frame. In research it has to be right, checked against something outside the code. I have done both,
+          and the habits from each keep making the other better.
+        </p>
+        <p>
+          I spent four years making games at BUas. I was AI and gameplay programmer and programming lead on
+          <a href="{{ '/spliced/' | relative_url }}">S.P.L.I.C.E.D.</a>, a UE5 Metroidvania released on Steam, the
+          only programmer for the graduation quarter of <a href="{{ '/small-dragon-big-appetite/' | relative_url }}">Small
+          Dragon Big Appetite</a>, since released on Steam too, and lead programmer at a student studio. Before that I
+          helped build two team engines that ran on <a href="{{ '/sub-nivis/' | relative_url }}">PlayStation 4 and PC</a>.
+        </p>
+        <p>
+          My MSc thesis at TU/e is <a href="{{ '/flatland-thesis/' | relative_url }}">Flatland</a>, a 2D multibody
+          physics engine built with Algoryx's Claude Lacoursi&egrave;re, where joints and contacts are exact constraints,
+          elastic bodies are compliant ones, and one solver handles them all. Next to it I build <a href="{{ '/hexforge/' | relative_url }}">HexForge</a>,
+          a <span class="nowrap">C++20</span> engine with a CUDA XPBD solver for fluids, cloth, sand and rigid bodies,
+          and <a href="{{ '/scrye/' | relative_url }}">scrye</a>, a Monte Carlo and wave-optics simulation of an
+          electron microscope.
+        </p>
+      </div>
+
+      <!-- 3. Timeline Card -->
+      <div class="card timeline-card">
+        <h2 class="card-title">Education</h2>
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2024 &ndash; Present</div>
+            <div class="timeline-content">
+              <h4>MSc Computer Science &amp; Engineering</h4>
+              <p>Eindhoven University of Technology &middot; thesis phase, graduating March 2027</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2020 &ndash; 2024</div>
+            <div class="timeline-content">
+              <h4>BSc Creative Media &amp; Game Technologies</h4>
+              <p>Breda University of Applied Sciences &middot; programming track</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2018 &ndash; 2020</div>
+            <div class="timeline-content">
+              <h4>International Baccalaureate</h4>
+              <p>International School Eindhoven &middot; HL Mathematics, Physics, English</p>
+            </div>
+          </div>
+
+        </div>
+        <a href="{{ '/resume/' | relative_url }}" class="timeline-link">Full resume &rarr;</a>
+      </div>
+
+      <!-- 4. Featured Projects: full-width row -->
+      <div class="card projects-card-home">
+        <div class="card-header">
+          <h2 class="card-title">Featured work</h2>
+          <a href="{{ '/projects/' | relative_url }}" class="view-all-link">All {{ site.projects.size }} projects &rarr;</a>
+        </div>
+
+        <div class="mini-projects-grid">
+          {%- assign featured_projects = site.projects | where: 'featured', true | sort: 'priority' -%}
+          {%- for project in featured_projects limit:3 -%}
+          <a href="{{ project.url | relative_url }}" class="mini-project">
+            {% if project.image %}
+            <div class="mini-project-img-container">
+              <img decoding="async" src="{{ project.image | relative_url }}" alt="{{ project.title }}" loading="lazy">
+            </div>
+            {% endif %}
+            <div class="mini-project-content">
+              <h3>{{ project.title }}</h3>
+              <p>{{ project.summary | default: project.content | strip_html | truncatewords: 22 }}</p>
+              <div class="mini-tags">
+                {%- for tag in project.tags limit:3 -%}
+                <span>{{ tag }}</span>
+                {%- endfor -%}
+              </div>
+            </div>
+          </a>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <!-- 5. Tech Stack Card: full-width row, one column per group -->
+      <div class="card stack-card">
+        <h2 class="card-title">Toolbox</h2>
+        <div class="stack-section">
+          <span class="stack-label">Languages</span>
+          <div class="stack-grid">
+            <span class="stack-item">C++20</span>
+            <span class="stack-item">Python</span>
+            <span class="stack-item">CUDA</span>
+            <span class="stack-item">Java</span>
+            <span class="stack-item">Rust</span>
+            <span class="stack-item">GLSL / HLSL / WGSL</span>
+          </div>
+        </div>
+        <div class="stack-section">
+          <span class="stack-label">Physics &amp; numerics</span>
+          <div class="stack-grid">
+            <span class="stack-item">Constrained multibody (Spook, LCP)</span>
+            <span class="stack-item">XPBD / PBF</span>
+            <span class="stack-item">Stable Fluids</span>
+            <span class="stack-item">RK4 / implicit Euler</span>
+            <span class="stack-item">Monte Carlo</span>
+            <span class="stack-item">Eigen</span>
+            <span class="stack-item">NumPy / SciPy / SymPy</span>
+            <span class="stack-item">pybind11</span>
+          </div>
+        </div>
+        <div class="stack-section">
+          <span class="stack-label">Games &amp; graphics</span>
+          <div class="stack-grid">
+            <span class="stack-item">Unreal Engine 5 (C++)</span>
+            <span class="stack-item">Game AI</span>
+            <span class="stack-item">OpenGL</span>
+            <span class="stack-item">WebGPU / wgpu</span>
+            <span class="stack-item">DirectX 12 (The Forge)</span>
+            <span class="stack-item">PlayStation 4</span>
+            <span class="stack-item">EnTT</span>
+            <span class="stack-item">Dear ImGui</span>
+          </div>
+        </div>
+        <div class="stack-section">
+          <span class="stack-label">Workflow</span>
+          <div class="stack-grid">
+            <span class="stack-item">CMake</span>
+            <span class="stack-item">GitHub Actions</span>
+            <span class="stack-item">Git</span>
+            <span class="stack-item">Perforce</span>
+            <span class="stack-item">doctest / pytest / gtest</span>
+            <span class="stack-item">Unreal Insights / Optick</span>
+            <span class="stack-item">LaTeX</span>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
 </div>
 
+<script src="{{ '/assets/js/boids.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
