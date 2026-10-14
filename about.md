@@ -234,7 +234,7 @@ description: "Ralph Warrand, software engineer working across games and simulati
             <div class="edu-details">
               <h4>A number ends an argument</h4>
               <p>Profiling is the step I am least willing to skip, because every optimisation I am proud of started somewhere I did not expect. Optick put 2.8&nbsp;ms of a 7.4&nbsp;ms frame into the enemies' line-of-sight raycasts. A profile of <a href="{{ '/spliced/' | relative_url }}">S.P.L.I.C.E.D.</a> turned up about 2,000 draw calls from spike traps. Unreal Insights showed that distant, culled enemies in <a href="{{ '/small-dragon-big-appetite/' | relative_url }}">Small Dragon</a> were still ticking their animation, AI controllers and behaviour trees; switching them off, plus LODs, took the full level from 77&nbsp;ms to 12.5&nbsp;ms. A foliage test put 7.6&nbsp;ms into a few hundred blades of simulated grass and ended grass for that project.</p>
-              <p>Opinions about performance are cheap and mine have been wrong often enough to distrust them.</p>
+              <p>A profile settles in minutes what a guess about performance cannot, so I measure first and optimise what the numbers point at.</p>
               <img width="1600" height="867" loading="lazy" decoding="async" src="{{ '/assets/sub-nivis/optick-capture.png' | relative_url }}" alt="An Optick profiler capture of a 512-enemy stress test, with the ray-cast function taking 2.8 ms of a 7.4 ms frame">
               <p class="video-caption">The capture that moved 512 enemies from 7.4&nbsp;ms to 5.3&nbsp;ms.</p>
             </div>

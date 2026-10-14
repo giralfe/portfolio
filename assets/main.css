@@ -1157,7 +1157,9 @@ p.sidebar-title {
   padding: 0;
   margin: 0 0 1.5rem;
   display: grid;
-  gap: 0.75rem;
+  /* Two columns once the panel is wide enough, one below. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: 0.75rem 2rem;
 }
 
 .bio-list li,
@@ -2245,7 +2247,3 @@ p.sidebar-title {
   flex-grow: 0;
 }
 
-/* About is all reading, so it keeps the narrower column. */
-.about-wrapper .wrapper {
-  max-width: 1200px;
-}
